@@ -18,32 +18,29 @@ class LatestMovieReviewsContainer extends Component {
     componentDidMount() {
         fetch(URL)
         .then(response => response.json())
-        .then(reviewData => {
-            this.setState({reviews: reviewData.results})
-            return console.log(reviewData.results)
-        }
-            )
+        .then(reviewData => this.setState({reviews: reviewData.results}))
     }
     
-    renderMovies = () => {
-        return this.state.reviews.map(movie =>{
-            return (
-                <div className="review">
-                    <h3>{ movie.display_title }</h3>
-                    <h4>By: { movie.byline }</h4>
-                    <p>{ movie.summary_short }</p>
-                    <a href={movie.link.url}>{ movie.link.suggested_link_text }</a>
-                    <br></br>----------------------------------------------------------------------
-                    <br></br>
-                </div>
-            )
-        })
-    }
+    // renderMovies = () => {
+    //     return this.state.reviews.map(movie =>{
+    //         return (
+    //             <div className="review" key={movie.display_title}>
+    //                 <h3>{ movie.display_title }</h3>
+    //                 <h4>By: { movie.byline }</h4>
+    //                 <p>{ movie.summary_short }</p>
+    //                 <a href={movie.link.url}>{ movie.link.suggested_link_text }</a>
+    //                 <br></br>----------------------------------------------------------------------
+    //                 <br></br>
+    //             </div>
+    //         )
+    //     })
+    // }
     render(){
 
         return(
             <div className='latest-movie-reviews'>
-                { this.renderMovies() }
+                <MovieReviews reviews={this.state.reviews} />
+
             </div>
         )
     }
